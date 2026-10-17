@@ -26,8 +26,7 @@ export default {
 
     // 定义 API 列表
     const endpoints = [
-      `https://www.google.com/s2/favicons?domain=${targetDomain}&sz=64`,
-      `https://favicon.im/${targetDomain}?larger=true`,
+      `https://icons.duckduckgo.com/ip3/${targetDomain}.ico`,
       `https://icon.bqb.cool/?url=https://${targetDomain}`,
       `https://www.faviconextractor.com/favicon/${targetDomain}?larger=true`
     ];

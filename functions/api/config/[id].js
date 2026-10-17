@@ -38,13 +38,13 @@ export async function onRequestPut(context) {
     if (!sanitizedName || !sanitizedUrl || !catelog_id) {
       return errorResponse('Name, URL and Catelog are required', 400);
     }
-    const iconAPI=env.ICON_API ||'https://favicon.im/';
+    const iconAPI=env.ICON_API ||'https://icons.duckduckgo.com/ip3/';
     if(!logo && url){
       if(url.startsWith('https://') || url.startsWith('http://')){
         const domain = url.replace(/^https?:\/\//, '').split('/')[0];
         sanitizedLogo = iconAPI+domain;
         if(!env.ICON_API){
-          sanitizedLogo+='?larger=true'
+          sanitizedLogo+=''?larger=true'sz=128'
         }
       }
       

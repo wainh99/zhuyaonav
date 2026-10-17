@@ -1,20 +1,13 @@
 // functions/api/categories/index.js
-import { isAdminAuthenticated, errorResponse, jsonResponse, normalizeSortOrder } from '../../_middleware';
+import { errorResponse, jsonResponse } from '../../_middleware';
 
 let columnsChecked = false;
 
 export async function onRequestGet(context) {
   const { request, env } = context;
 
-  // Note: This API is currently protected. If it is needed for public "Add Site", it should be public or have a public variant.
-  // Assuming Admin usage for now.
-  if (!(await isAdminAuthenticated(request, env))) {
-    // Check if it's a request from the "Add Site" modal (visitor).
-    // If we want to allow visitors to see categories, we should remove this check or make it conditional.
-    // For now, I will keep it as is, but if the user wants public submission to work, this might need change.
-    // But the task is about "Multi-level Menu", which is SSR.
-    return errorResponse('Unauthorized', 401);
-  }
+  // 分类列表是公开数据（首页直接渲染分类树），前台"添加新书签"弹窗需要无登录加载分类，
+  // 因此 GET 列表接口不做 admin 鉴权。增删改（create.js / [id].js）仍保持 admin 鉴权。
   
   if (!columnsChecked) {
       try {

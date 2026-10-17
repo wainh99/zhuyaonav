@@ -181,7 +181,7 @@ export async function onRequestPost(context) {
     const siteInsertStmts = [];
     let itemsAdded = 0;
     let itemsSkipped = 0;
-    const iconAPI = env.ICON_API || 'https://favicon.im/';
+    const iconAPI = env.ICON_API || 'https://icons.duckduckgo.com/ip3/';
 
     for (const site of sitesToImport) {
         const sanitizedUrl = (site.url || '').trim();
@@ -223,7 +223,7 @@ export async function onRequestPost(context) {
         let sanitizedLogo = (site.logo || '').trim();
         if ((!sanitizedLogo || sanitizedLogo.startsWith('data:image')) && sanitizedUrl.startsWith('http')) {
             const domain = sanitizedUrl.replace(/^https?:\/\//, '').split('/')[0];
-            sanitizedLogo = `${iconAPI}${domain}${!env.ICON_API ? '?larger=true' : ''}`;
+            sanitizedLogo = `${iconAPI}${domain}${!env.ICON_API ? ''?larger=true'sz=128' : ''}`;
         }
         if (!sanitizedLogo) sanitizedLogo = null;
 
