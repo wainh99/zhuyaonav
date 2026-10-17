@@ -223,7 +223,7 @@ export async function onRequestPost(context) {
         let sanitizedLogo = (site.logo || '').trim();
         if ((!sanitizedLogo || sanitizedLogo.startsWith('data:image')) && sanitizedUrl.startsWith('http')) {
             const domain = sanitizedUrl.replace(/^https?:\/\//, '').split('/')[0];
-            sanitizedLogo = `${iconAPI}${domain}${!env.ICON_API ? ''?larger=true'sz=128' : ''}`;
+            sanitizedLogo = `${iconAPI}${domain}${!env.ICON_API ? '.ico' : ''}`;
         }
         if (!sanitizedLogo) sanitizedLogo = null;
 

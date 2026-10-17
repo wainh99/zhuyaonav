@@ -25,7 +25,7 @@ export async function onRequestPut(context) {
         const domain = url.replace(/^https?:\/\//, '').split('/')[0];
         sanitizedLogo = iconAPI+domain;
         if(!env.ICON_API){
-          sanitizedLogo+=''?larger=true'sz=128'
+          sanitizedLogo+='.ico'
         }
       }
       
