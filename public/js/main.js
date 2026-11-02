@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let logoHtml = '';
         if (site.logo) {
-             logoHtml = `<img src="${escapeHTML(site.logo)}" alt="${safeName}" class="w-10 h-10 rounded-lg object-cover bg-gray-100">`;
+             logoHtml = `<img src="${escapeHTML(rewriteIconUrl(site.logo))}" alt="${safeName}" class="w-10 h-10 rounded-lg object-cover bg-gray-100">`;
         } else {
              logoHtml = `<div class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center text-white font-semibold text-lg shadow-inner">${cardInitial}</div>`;
         }
@@ -729,5 +729,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!url) return '';
       if (url.startsWith('http')) return url;
       return 'https://' + url;
+  }
+  
+  function rewriteIconUrl(url) {
+    if (!url) return url;
+    const m = url.match(/^https?:\/\/icons\.duckduckgo\.com\/ip3\/(.+?)(?:\.ico)?$/);
+    if (m) return 'https://icon.bqb.cool/?url=https://' + m[1];
+    return url;
   }
 });
