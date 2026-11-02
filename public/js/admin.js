@@ -118,6 +118,13 @@ var normalizeUrl = function (value) {
   return normalized;
 };
 
+var rewriteIconUrl = function (url) {
+  if (!url) return url;
+  var m = url.match(/^https?:\/\/icons\.duckduckgo\.com\/ip3\/(.+?)(?:\.ico)?$/);
+  if (m) return 'https://icon.bqb.cool/?url=https://' + m[1];
+  return url;
+}
+
 
 const importBtn = document.getElementById('importBtn');
 const importFile = document.getElementById('importFile');
@@ -883,7 +890,7 @@ function renderPendingConfigs(configs) {
       <td class="p-3 border-b">${config.id}</td>
       <td class="p-3 border-b">${escapeHTML(config.name)}</td>
       <td class="p-3 border-b truncate max-w-[200px]" title="${config.url}">${escapeHTML(config.url)}</td>
-      <td class="p-3 border-b">${config.logo ? `<img src="${escapeHTML(normalizeUrl(config.logo))}" class="w-8 h-8 rounded">` : '无'}</td>
+      <td class="p-3 border-b">${config.logo ? `<img src="${escapeHTML(rewriteIconUrl(normalizeUrl(config.logo)))}" class="w-8 h-8 rounded">` : '无'}</td>
       <td class="p-3 border-b max-w-[200px] truncate" title="${config.desc}">${escapeHTML(config.desc)}</td>
       <td class="p-3 border-b">${escapeHTML(config.catelog)}</td>
       <td class="p-3 border-b">
@@ -962,7 +969,7 @@ function renderConfig(configs) {
     // Logo render logic
     let logoHtml = '';
     if (normalizedLogo) {
-      logoHtml = `<img src="${escapeHTML(normalizedLogo)}" alt="${safeName}" class="w-10 h-10 rounded-lg object-cover bg-gray-100">`;
+      logoHtml = `<img src="${escapeHTML(rewriteIconUrl(normalizedLogo))}" alt="${safeName}" class="w-10 h-10 rounded-lg object-cover bg-gray-100">`;
     } else {
       logoHtml = `<div class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center text-white font-semibold text-lg shadow-inner">${cardInitial}</div>`;
     }
